@@ -19,7 +19,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 
-iron:router
+
 alanning:roles@1.2.8
 mizzao:bootstrap-3
 
@@ -30,3 +30,4 @@ flemay:less-autoprefixer
 semantic:ui-css
 kadira:flow-router
 kadira:blaze-layout
+

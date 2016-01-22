@@ -1,14 +1,16 @@
 <template name="home">
+	<br>
 	{{#if isAdminUser}}
-		<div class="alert alert-info">Hi admin!</div>
+		<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
+		{{> updateRolesModal}}
 	{{else}}	
 		{{#if isInRole 'worker'}}
-			<div class="alert alert-info">Hi worker!</div>
+			<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
 		{{else}}
-			{{#if isInRole 'user'}}
-				<div class="alert alert-info">Hi user!</div>
+			{{#if isInRole 'client'}}
+				<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
 			{{else}}
-				<div class="alert alert-info">Hi stranger!</div>
+				<div class="ui huge header">Hi stranger!</div>
 			{{/if}}	
 		{{/if}}
 	{{/if}}

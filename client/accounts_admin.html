@@ -1,4 +1,5 @@
 <template name="accountsAdmin">
+   {{#if isAdminUser}} 
     <br>
     <div class="row accounts-search">
         <div class="col-sm-offset-4 col-sm-8 col-md-offset-6 col-md-6 col-lg-offset-8 col-lg-4">
@@ -47,4 +48,7 @@
     {{> deleteAccountModal}}
     {{> infoAccountModal}}
     {{> updateAccountModal}}
+ {{else}}
+    <p> You are not authorized to be here!!! Go <a href='/'>back</a></p>
+ {{/if}}   
 </template>

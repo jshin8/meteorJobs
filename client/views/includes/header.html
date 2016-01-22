@@ -21,17 +21,27 @@
 
       {{#if isInRole 'worker'}}
       <div class="ui simple dropdown item">
-        User Stuff
+        Worker Stuff
         <i class="dropdown icon"></i>
         <div class="menu">
-          <a href="/admin/" class="item"><i class="edit icon"></i>Users List</a>
-
-          <a href="#updateroles" data-toggle="modal" class="item"><i class="edit icon"></i>Manage Roles</a>
 
           <a class="item"><i class="settings icon"></i> Account Settings</a>
         </div>
       </div>
       {{/if}}
+
+      {{#if isInRole 'client'}}
+      <div class="ui simple dropdown item">
+        Client Stuff
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a href="/client/" class="item"><i class="edit icon"></i>My Jobs List</a>
+
+          <a class="item"><i class="settings icon"></i> Account Settings</a>
+        </div>
+      </div>
+      {{/if}}
+
     </div>
     <div class="ui container">
       <div class="right menu">
