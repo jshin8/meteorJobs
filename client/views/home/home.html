@@ -1,0 +1,15 @@
+<template name="home">
+	{{#if isAdminUser}}
+		<div class="alert alert-info">Hi admin!</div>
+	{{else}}	
+		{{#if isInRole 'worker'}}
+			<div class="alert alert-info">Hi worker!</div>
+		{{else}}
+			{{#if isInRole 'user'}}
+				<div class="alert alert-info">Hi user!</div>
+			{{else}}
+				<div class="alert alert-info">Hi stranger!</div>
+			{{/if}}	
+		{{/if}}
+	{{/if}}
+</template>

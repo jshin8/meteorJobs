@@ -1,0 +1,42 @@
+<template name="header">
+  <div class="ui attached stackable menu">
+    <div class="ui container">
+      <a href="/" class="item">
+        <i class="home icon"></i> Home
+      </a>
+
+      {{#if isInRole 'admin'}}
+      <div class="ui simple dropdown item">
+        Admin Stuff
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a href="/admin/" class="item"><i class="users icon"></i>Users List</a>
+
+          <a href="#updateroles" data-toggle="modal" class="item"><i class="announcement icon"></i>Manage Roles</a>
+          
+          <a class="item"><i class="settings icon"></i> Account Settings</a>
+        </div>
+      </div>
+      {{/if}}
+
+      {{#if isInRole 'worker'}}
+      <div class="ui simple dropdown item">
+        User Stuff
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a href="/admin/" class="item"><i class="edit icon"></i>Users List</a>
+
+          <a href="#updateroles" data-toggle="modal" class="item"><i class="edit icon"></i>Manage Roles</a>
+
+          <a class="item"><i class="settings icon"></i> Account Settings</a>
+        </div>
+      </div>
+      {{/if}}
+    </div>
+    <div class="ui container">
+      <div class="right menu">
+        {{> loginButtons}}
+      </div>
+    </div>  
+  </div>
+</template>
