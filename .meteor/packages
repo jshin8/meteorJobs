@@ -31,3 +31,7 @@ semantic:ui-css
 kadira:flow-router
 kadira:blaze-layout
 
+alexgreg:meteor-tabular-semantic
+
+matb33:collection-hooks
+aldeed:collection2

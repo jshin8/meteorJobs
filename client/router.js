@@ -13,10 +13,11 @@ FlowRouter.route('/admin', {
   }
 });
 
+
 //user routes
-FlowRouter.route('/addjob', {
+FlowRouter.route('/additem', {
   action: function () {
-    BlazeLayout.render('layout', {content: 'addJobClient'});
+    BlazeLayout.render('layout', {content: 'addItem'});
   }
 });
 

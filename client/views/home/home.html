@@ -8,24 +8,12 @@
 			<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
 		{{else}}
 			{{#if isInRole 'client'}}
+			{{currentUser}}
 				<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
-				<a href="/addjob/" class="massive ui button">Add a New Job</a>
-
-				<div class="container">
-				    
-				    <h1>Job List ({{incompleteCount}})</h1>
-						<label class="hide-completed">
-					        <input type="checkbox" checked="{{hideCompleted}}" />
-					        Hide Completed Jobs
-					    </label>
-					  
-				    <ul>
-				      {{#each jobs}}
-				        {{> jobList}}
-				      {{/each}}
-				    </ul>
-
-			  </div>
+				
+				<div class="ui container">
+					{{> itemList}}
+			  	</div>
 
 
 			{{else}}
