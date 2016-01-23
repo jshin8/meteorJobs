@@ -14,9 +14,9 @@ FlowRouter.route('/admin', {
 });
 
 //user routes
-FlowRouter.route('/client/', {
+FlowRouter.route('/addjob', {
   action: function () {
-    BlazeLayout.render('layout', {content: 'jobsListClient'});
+    BlazeLayout.render('layout', {content: 'addJobClient'});
   }
 });
 
