@@ -103,7 +103,8 @@ var addItem = function(){
     qtyType: $('#itemQtyType').val(),
     price: $('#itemPrice').val(),
     email: $('#itemEmail').val(),
-    statusOne: $('#itemStatusOne').val()
+    worker: $('#itemWorker').val()
+    // statusOne: $('#itemStatusOne').val()
   };
 
   Items.insert(newItem, {validationContext: 'insertForm'}, function(error, result) {
@@ -286,7 +287,7 @@ Template.currentOrders.helpers({
 
 Template.itemWorker.events({
   'click .makeItem': function(){
-  	Session.set('itemInScope', this);
+  	AmplifiedSession.set('itemInScope', this);
   	var user = Meteor.user();
   	console.log(user._id);
     Items.update({_id:this._id}, {$set:{worker:user._id}}, function(error, result) {
@@ -298,7 +299,7 @@ Template.itemWorker.events({
 
 Template.specificOrder.helpers({
 	itemInScope: function() {
-		return Session.get('itemInScope');
+		return AmplifiedSession.get('itemInScope');
 	}
 });
 
@@ -313,14 +314,14 @@ Template.specificOrder.events({
 
  // A version of Session that also store the key/value pair to local storage
   // using Amplify
- // var AmplifiedSession = _.extend({}, Session, {
- //    keys: _.object(_.map(amplify.store(), function (value, key) {
- //      return [key, JSON.stringify(value)];
- //    })),
- //    set: function (key, value) {
- //      Session.set.apply(this, arguments);
- //      amplify.store(key, value);
- //    }
- //  });
+ var AmplifiedSession = _.extend({}, Session, {
+    keys: _.object(_.map(amplify.store(), function (value, key) {
+      return [key, JSON.stringify(value)];
+    })),
+    set: function (key, value) {
+      Session.set.apply(this, arguments);
+      amplify.store(key, value);
+    }
+  });
 }
 
