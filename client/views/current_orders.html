@@ -1,0 +1,43 @@
+<template name="currentOrders">
+  {{#if isInRole 'worker'}}
+<br>
+  <div class="ui medium header">Current Orders</div>
+  <table class="ui compact celled striped table">
+    <thead>
+      <tr>
+        <th class="two column wide">Store</th>
+        <th class="two column wide">Name</th>
+        <th class="two column wide">Size</th>
+        <th class="two column wide">Weight Type</th>
+        <th class="two column wide">Qty</th>
+        <th class="two column wide">Qty Type</th>
+        <th class="two column wide">Price</th>
+        {{#if isLoggedIn}}<th></th>{{/if}}
+        
+      </tr>
+    </thead>
+    <tbody>
+      {{#each items}}
+        {{> itemWorker}}
+      {{/each}}
+    </tbody>
+  </table>
+  {{/if}}  
+</template>
+
+<template name="itemWorker">
+
+    <tr>
+      <td>{{store}}</td>
+      <td>{{name}}</td>
+      <td>{{size}}</td>
+      <td>{{weightType}}</td>
+      <td>{{qty}}</td>
+      <td>{{qtyType}}</td>
+      <td>{{price}}</td>
+      {{#if isLoggedIn}}<td><button class="ui mini primary button editItem"><i class="ui edit icon"></i>Edit</button><button class="ui mini red button deleteItem"><i class="ui delete icon"></i>Delete</button></td>{{/if}}
+      <td>{{owner}}</td>
+    </tr>
+    
+</template>
+

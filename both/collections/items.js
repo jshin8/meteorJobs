@@ -31,11 +31,10 @@ Items.attachSchema(new SimpleSchema({
     label: "Name",
     max: 200
   },
-  weight: {
-    type: Number,
-    label: "Weight",
-    decimal: true,
-    min: 0  
+  size: {
+    type: String,
+    label: "Size",
+    min: 1  
   },
   weightType: {
     type: String,
@@ -67,7 +66,7 @@ var saveItem = function(){
     var editItem = {
       store: $("#editItemStore").val(),
       name: $("#editItemName").val(),
-      weight: $("#editItemWeight").val(),
+      size: $("#editItemSize").val(),
       weightType: $("#editItemWeightType").val(),
       qty: $("#editItemQty").val(),
       qtyType: $("#editItemQtyType").val(),
@@ -85,7 +84,7 @@ var addItem = function(){
   var newItem = {
     store: $('#itemStore').val(),
     name: $('#itemName').val(),
-    weight: $('#itemWeight').val(),
+    size: $('#itemSize').val(),
     weightType: $('#itemWeightType').val(),
     qty: $('#itemQty').val(),
     qtyType: $('#itemQtyType').val(),
@@ -160,6 +159,7 @@ Template.itemsearch.helpers({
 Template.addItem.events({
   'submit form': function(e, template){
     addItem();
+    resetForm(template);
     return false;
   },
   'click #cancelButton': function(e, template){
@@ -197,7 +197,7 @@ Template.itemList.helpers({
 
 Template.itemList.events({
   'click #searchButton': function(e, t){
-    if($('.ui.input.filterInput:visible').length != 0){
+    if($('.ui.input.filterInput:visible').length !== 0){
       Session.set('searchQuery', {});
     }
     $('.ui.input.filterInput').transition('slide down');
@@ -239,5 +239,13 @@ Template.item.events({
     }
   }
 });
+
+//worker logic
+Template.currentOrders.helpers({
+  items: function() {
+    return Items.find();
+  }
+});
+
 }
 

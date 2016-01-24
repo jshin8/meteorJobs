@@ -14,10 +14,10 @@ FlowRouter.route('/admin', {
 });
 
 
-//user routes
-FlowRouter.route('/additem', {
+//client routes
+FlowRouter.route('/itemhistory', {
   action: function () {
-    BlazeLayout.render('layout', {content: 'addItem'});
+    BlazeLayout.render('layout', {content: 'itemList'});
   }
 });
 

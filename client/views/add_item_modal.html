@@ -2,7 +2,7 @@
 {{#if isLoggedIn}}
 <div id="addItemAccordion" class="ui styled fluid accordion">
   <div class="title">
-    <div class="ui mini green button"><i class="ui add icon"></i>Add Items</div>  
+    <div class="ui mini green button"><i class="ui add icon"></i>New Order</div>  
   </div>
 
   <div class="content">
@@ -19,8 +19,15 @@
       </div>
       <div class="five fields">
         <div class="field">
-          <label for="itemWeight">Weight:</label>
-          <input type="text" id="itemWeight">
+          <label for="itemSize">Size:</label>
+          
+          <select class="ui dropdown" id='itemSize'>
+          	  <option value=""></option>
+			  <option value="Small">Small</option>
+			  <option value="Medium">Medium</option>
+			  <option value="Large">Large</option>
+		  </select>
+
         </div>
         <div class="field">
           <label for="itemWeightType">Weight Type:</label>
@@ -38,6 +45,8 @@
           <label for="itemPrice">Price:</label>
           <input type="text" id="itemPrice">
         </div>
+        	<label for="itemEmail"></label>
+          <input type="text" id="itemEmail" value="{{#with currentUser}}{{username}}{{/with}}">
       </div>
       <input type="submit" id="addNewItem" class="ui mini primary button" value="Save">
       <div id="cancelButton" class="button ui mini red button">Cancel</div>

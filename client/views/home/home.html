@@ -6,15 +6,18 @@
 	{{else}}	
 		{{#if isInRole 'worker'}}
 			<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
+
+			<div class="ui container">
+				{{> currentOrders}}
+			</div>	
+
 		{{else}}
 			{{#if isInRole 'client'}}
-			{{currentUser}}
 				<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
 				
 				<div class="ui container">
-					{{> itemList}}
+					{{> addItem}}
 			  	</div>
-
 
 			{{else}}
 				<div class="ui huge header">Hi stranger!</div>
