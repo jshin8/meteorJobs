@@ -1,10 +1,18 @@
 <template name="specificOrder">
+{{#if isInRole 'worker'}}
 {{#with itemInScope}}
 <br>
 <div class="ui container">
-	<div class="ui large header">Order Details:</div>
-	<div class="ui medium header"><strong>{{email}}</strong> ordered a <strong>{{size}}</strong> pizza with these toppings.</div>
+	<div class="ui huge header">Order Details:</div>
+	<div class="ui medium header"><h2>{{email}}</h2> ordered a <h2>{{size}}</h2> pizza with these toppings.</div>
 </div>
-
+<br><br><br>
+<div class="ui container progressbuttons">
+<!-- <button class="huge ui {{#if statusOne}}green{{else}}red{{/if}} button one">Order Received...</button> -->
+<button class="huge ui red button">Prepping your pie for the oven...</button>
+<button class="huge ui red button">It's baking...</button>
+<button class="huge ui red button">Out for delivery!</button>
+</div>
 {{/with}}
+{{/if}}
 </template>

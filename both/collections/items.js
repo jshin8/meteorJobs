@@ -68,6 +68,11 @@ Items.attachSchema(new SimpleSchema({
   	type: String,
   	label: 'worker'
   }
+  // ,
+  // statusOne: {
+  // 	type: String,
+  // 	label: 'statusOne'
+  // }
 }));
 
 var saveItem = function(){
@@ -79,14 +84,14 @@ var saveItem = function(){
       qty: $("#editItemQty").val(),
       qtyType: $("#editItemQtyType").val(),
       price: $("#editItemPrice").val()
-    }
+    };
 
     Items.update(Session.get('editItemId'), {$set: editItem}, {validationContext: 'updateForm'}, function(error, result) {
       if(!error){
         Session.set('editItemId', null);
       }
     });
-}
+};
 
 var addItem = function(){
   var newItem = {
@@ -97,7 +102,8 @@ var addItem = function(){
     qty: $('#itemQty').val(),
     qtyType: $('#itemQtyType').val(),
     price: $('#itemPrice').val(),
-    email: $('#itemEmail').val()
+    email: $('#itemEmail').val(),
+    statusOne: $('#itemStatusOne').val()
   };
 
   Items.insert(newItem, {validationContext: 'insertForm'}, function(error, result) {
@@ -269,6 +275,8 @@ Template.item.events({
   }
 });
 
+
+
 //worker logic
 Template.currentOrders.helpers({
   items: function() {
@@ -278,7 +286,7 @@ Template.currentOrders.helpers({
 
 Template.itemWorker.events({
   'click .makeItem': function(){
-  	AmplifiedSession.set('itemInScope', this);
+  	Session.set('itemInScope', this);
   	var user = Meteor.user();
   	console.log(user._id);
     Items.update({_id:this._id}, {$set:{worker:user._id}}, function(error, result) {
@@ -290,18 +298,29 @@ Template.itemWorker.events({
 
 Template.specificOrder.helpers({
 	itemInScope: function() {
-		return AmplifiedSession.get('itemInScope');
+		return Session.get('itemInScope');
 	}
 });
 
- var AmplifiedSession = _.extend({}, Session, {
-    keys: _.object(_.map(amplify.store(), function (value, key) {
-      return [key, JSON.stringify(value)];
-    })),
-    set: function (key, value) {
-      Session.set.apply(this, arguments);
-      amplify.store(key, value);
-    }
-  });
+Template.specificOrder.events({
+  'click .one': function(){
+  	console.log(this);
+  	Items.update({_id:this._id}, {$set:{statusOne:'true'}}, function(error, result) {
+    	console.log(error);
+    });
+  }
+});
+
+ // A version of Session that also store the key/value pair to local storage
+  // using Amplify
+ // var AmplifiedSession = _.extend({}, Session, {
+ //    keys: _.object(_.map(amplify.store(), function (value, key) {
+ //      return [key, JSON.stringify(value)];
+ //    })),
+ //    set: function (key, value) {
+ //      Session.set.apply(this, arguments);
+ //      amplify.store(key, value);
+ //    }
+ //  });
 }
 

@@ -16,3 +16,7 @@
 .clickable {
 	cursor: pointer;
 }
+
+.progressbuttons{
+	margin:auto;
+}
