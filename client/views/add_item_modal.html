@@ -47,11 +47,21 @@
         </div>
           <label for="itemEmail"></label>
           <input type="hidden" id="itemEmail" value="{{#with currentUser}}{{email}}{{/with}}">
+
           <label for="itemWorker"></label>
           <input type="hidden" id="itemWorker" value="worker">
 
-          <!-- <label for="itemStatusOne"></label>
-          <input type="hidden" id="itemStatusOne" value=""> -->
+          <label for="itemStatusOne"></label>
+          <input type="hidden" id="itemStatusOne" value="red">
+
+          <label for="itemStatusTwo"></label>
+          <input type="hidden" id="itemStatusTwo" value="red">
+
+          <label for="itemStatusThree"></label>
+          <input type="hidden" id="itemStatusThree" value="red">
+
+          <label for="itemStatusFour"></label>
+          <input type="hidden" id="itemStatusFour" value="red">
       </div>
       <input type="submit" id="addNewItem" class="ui mini primary button" value="Save">
       <div id="cancelButton" class="button ui mini red button">Cancel</div>

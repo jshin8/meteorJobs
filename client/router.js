@@ -23,7 +23,11 @@ FlowRouter.route('/itemhistory', {
 
 //worker routes
 FlowRouter.route('/:_id', {
-  action: function () {
+  action: function (params, queryParams) {
+    console.log("params:", params);
+    console.log("query params:", queryParams);
+    var client = FlowRouter.getParam('_id');
+    console.log(client);
     BlazeLayout.render('layout', {content: 'specificOrder'});
   }
 });

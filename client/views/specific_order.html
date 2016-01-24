@@ -1,6 +1,5 @@
 <template name="specificOrder">
 {{#if isInRole 'worker'}}
-{{#with itemInScope}}
 <br>
 <div class="ui container">
 	<div class="ui huge header">Order Details:</div>
@@ -8,11 +7,11 @@
 </div>
 <br><br><br>
 <div class="ui container progressbuttons">
-<!-- <button class="huge ui {{#if statusOne}}green{{else}}red{{/if}} button one">Order Received...</button> -->
-<button class="huge ui red button">Prepping your pie for the oven...</button>
-<button class="huge ui red button">It's baking...</button>
-<button class="huge ui red button">Out for delivery!</button>
+<button class="huge ui {{statusOne}} button one">Order Received...</button>
+<button class="huge ui {{statusTwo}} button two">Prepping your pie for the oven...</button>
+<button class="huge ui {{statusThree}} button three">It's baking...</button>
+<button class="huge ui {{statusFour}} button four">Out for delivery!</button>
 </div>
-{{/with}}
+
 {{/if}}
 </template>

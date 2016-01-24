@@ -17,7 +17,9 @@ Items.allow({
   remove: function (userId, doc) {
     // can only remove your own documents
     return doc.owner === userId;
-  }
+  },
+  fetch: ['owner']
+  
 });
 
 Items.attachSchema(new SimpleSchema({
@@ -67,12 +69,23 @@ Items.attachSchema(new SimpleSchema({
   worker: {
   	type: String,
   	label: 'worker'
+  },
+  statusOne: {
+  	type: String,
+  	label: 'statusOne'
+  },
+  statusTwo: {
+    type: String,
+    label: 'statusTwo'
+  },
+  statusThree: {
+    type: String,
+    label: 'statusThree'
+  },
+  statusFour: {
+    type: String,
+    label: 'statusFour'
   }
-  // ,
-  // statusOne: {
-  // 	type: String,
-  // 	label: 'statusOne'
-  // }
 }));
 
 var saveItem = function(){
@@ -103,8 +116,11 @@ var addItem = function(){
     qtyType: $('#itemQtyType').val(),
     price: $('#itemPrice').val(),
     email: $('#itemEmail').val(),
-    worker: $('#itemWorker').val()
-    // statusOne: $('#itemStatusOne').val()
+    worker: $('#itemWorker').val(),
+    statusOne: $('#itemStatusOne').val(),
+    statusTwo: $('#itemStatusTwo').val(),
+    statusThree: $('#itemStatusThree').val(),
+    statusFour: $('#itemStatusFour').val()
   };
 
   Items.insert(newItem, {validationContext: 'insertForm'}, function(error, result) {
@@ -287,7 +303,6 @@ Template.currentOrders.helpers({
 
 Template.itemWorker.events({
   'click .makeItem': function(){
-  	AmplifiedSession.set('itemInScope', this);
   	var user = Meteor.user();
   	console.log(user._id);
     Items.update({_id:this._id}, {$set:{worker:user._id}}, function(error, result) {
@@ -298,16 +313,72 @@ Template.itemWorker.events({
 });
 
 Template.specificOrder.helpers({
-	itemInScope: function() {
-		return AmplifiedSession.get('itemInScope');
-	}
+
+  email: function(){
+    var client = FlowRouter.getParam('_id');
+    console.log(client);
+    var what =Items.findOne({_id:client});
+    console.log(what.email);
+    return what.email;
+  },
+
+  size: function(){
+    var client = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:client});
+    return what.size;
+  },
+
+  statusOne: function(){
+    var client = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:client});
+    return what.statusOne;
+  },
+
+  statusTwo: function(){
+    var client = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:client});
+    return what.statusTwo;
+  },
+
+  statusThree: function(){
+    var client = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:client});
+    return what.statusThree;
+  },
+
+  statusFour: function(){
+    var client = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:client});
+    return what.statusFour;
+  }
 });
 
 Template.specificOrder.events({
   'click .one': function(){
-  	console.log(this);
-  	Items.update({_id:this._id}, {$set:{statusOne:'true'}}, function(error, result) {
+    var client = FlowRouter.getParam('_id');
+  	Items.update({_id:client}, {$set:{statusOne:'green'}}, function(error, result) {
     	console.log(error);
+    });
+  },
+
+  'click .two': function(){
+    var client = FlowRouter.getParam('_id');
+    Items.update({_id:client}, {$set:{statusTwo:'green'}}, function(error, result) {
+      console.log(error);
+    });
+  },
+
+  'click .three': function(){
+    var client = FlowRouter.getParam('_id');
+    Items.update({_id:client}, {$set:{statusThree:'green'}}, function(error, result) {
+      console.log(error);
+    });
+  },
+
+  'click .four': function(){
+    var client = FlowRouter.getParam('_id');
+    Items.update({_id:client}, {$set:{statusFour:'green'}}, function(error, result) {
+      console.log(error);
     });
   }
 });
