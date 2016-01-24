@@ -59,6 +59,10 @@ Items.attachSchema(new SimpleSchema({
   owner: {
     type: String,
     label: 'owner'
+  },
+  email: {
+    type: String,
+    label: 'Email'
   }
 }));
 
@@ -88,7 +92,8 @@ var addItem = function(){
     weightType: $('#itemWeightType').val(),
     qty: $('#itemQty').val(),
     qtyType: $('#itemQtyType').val(),
-    price: $('#itemPrice').val()
+    price: $('#itemPrice').val(),
+    email: $('#itemEmail').val()
   };
 
   Items.insert(newItem, {validationContext: 'insertForm'}, function(error, result) {
@@ -118,7 +123,7 @@ Meteor.publish("allItems", function (searchQuery) {
       }
     });
   }
-  return Items.find(mongoQuery,{limit:10});
+  return Items.find(mongoQuery,{limit:1000});
 });
 }
 
@@ -182,6 +187,26 @@ Template.addItem.rendered = function(){
   });
 };
 
+Template.addItem.helpers({
+	email: function () {
+		if (this.emails && this.emails.length)
+			return this.emails[0].address;
+
+		if (this.services) {
+			//Iterate through services
+			for (var serviceName in this.services) {
+				var serviceObject = this.services[serviceName];
+				//If an 'id' isset then assume valid service
+				if (serviceObject.id) {
+					if (serviceObject.email) {
+						return serviceObject.email;
+					}
+				}
+			}
+		}
+		return "";
+	}
+});
 
 
 

@@ -7,6 +7,7 @@
       <tr>
         <th class="two column wide">Store</th>
         <th class="two column wide">Name</th>
+        <th class="two column wide">Email</th>
         <th class="two column wide">Size</th>
         <th class="two column wide">Weight Type</th>
         <th class="two column wide">Qty</th>
@@ -30,13 +31,13 @@
     <tr>
       <td>{{store}}</td>
       <td>{{name}}</td>
+      <td>{{email}}</td>
       <td>{{size}}</td>
       <td>{{weightType}}</td>
       <td>{{qty}}</td>
       <td>{{qtyType}}</td>
       <td>{{price}}</td>
       {{#if isLoggedIn}}<td><button class="ui mini primary button editItem"><i class="ui edit icon"></i>Edit</button><button class="ui mini red button deleteItem"><i class="ui delete icon"></i>Delete</button></td>{{/if}}
-      <td>{{owner}}</td>
     </tr>
     
 </template>
