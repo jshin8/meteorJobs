@@ -63,6 +63,10 @@ Items.attachSchema(new SimpleSchema({
   email: {
     type: String,
     label: 'Email'
+  },
+  worker: {
+  	type: String,
+  	label: 'worker'
   }
 }));
 
@@ -272,5 +276,32 @@ Template.currentOrders.helpers({
   }
 });
 
+Template.itemWorker.events({
+  'click .makeItem': function(){
+  	AmplifiedSession.set('itemInScope', this);
+  	var user = Meteor.user();
+  	console.log(user._id);
+    Items.update({_id:this._id}, {$set:{worker:user._id}}, function(error, result) {
+    	console.log(error);
+    });
+  }
+  
+});
+
+Template.specificOrder.helpers({
+	itemInScope: function() {
+		return AmplifiedSession.get('itemInScope');
+	}
+});
+
+ var AmplifiedSession = _.extend({}, Session, {
+    keys: _.object(_.map(amplify.store(), function (value, key) {
+      return [key, JSON.stringify(value)];
+    })),
+    set: function (key, value) {
+      Session.set.apply(this, arguments);
+      amplify.store(key, value);
+    }
+  });
 }
 

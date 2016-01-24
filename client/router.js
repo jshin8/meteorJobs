@@ -21,6 +21,13 @@ FlowRouter.route('/itemhistory', {
   }
 });
 
+//worker routes
+FlowRouter.route('/:_id', {
+  action: function () {
+    BlazeLayout.render('layout', {content: 'specificOrder'});
+  }
+});
+
 
 
 //redirects to '/' when logged out
