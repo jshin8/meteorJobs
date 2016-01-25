@@ -468,9 +468,16 @@ Template.specificOrder.events({
 
   'click .four': function(){
     var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
     Items.update({_id:targetitem}, {$set:{statusFour:'green'}}, function(error, result) {
       console.log(error);
     });
+    Meteor.call('sendEmail',
+          what.email,
+          'meteorjobsapp@gmail.com',
+          'Pizza!',
+          'Your pizza is on its way!!!'
+        );
   },
 
   'click .five': function(){
@@ -490,6 +497,7 @@ TabularTables.Items = new Tabular.Table({
   collection: Items,
   columns: [
     {data: "worker", title: "Worker"},
+    {data: "rating", title: "Rating"},
     {data: "size", title: "Size"},
     {data: "crust", title: "Crust"},
     {data: "email", title: "Email"},
