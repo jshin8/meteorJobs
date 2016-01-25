@@ -1,0 +1,8 @@
+<template name="ordersAdmin">
+<br>
+ {{#if isAdminUser}} 
+    {{> tabular table=TabularTables.Items class="ui selectable celled grey table"}}
+ {{else}}
+    <p> You are not authorized to be here!!! Go <a href='/'>back</a></p>
+ {{/if}}   
+</template>

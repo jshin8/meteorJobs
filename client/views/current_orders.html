@@ -5,14 +5,10 @@
   <table class="ui compact celled striped table">
     <thead>
       <tr>
-        <th class="two column wide">Store</th>
-        <th class="two column wide">Name</th>
-        <th class="two column wide">Email</th>
-        <th class="two column wide">Size</th>
-        <th class="two column wide">Weight Type</th>
-        <th class="two column wide">Qty</th>
-        <th class="two column wide">Qty Type</th>
-        <th class="two column wide">Price</th>
+        <th class="three column wide">Email</th>
+        <th class="three column wide">Size</th>
+        <th class="three column wide">Crust</th>
+        <th class="three column wide">Toppings</th>
         <th></th>
         
       </tr>
@@ -29,14 +25,10 @@
 <template name="itemWorker">
   {{#if incomplete}}
     <tr>
-      <td>{{store}}</td>
-      <td>{{name}}</td>
       <td>{{email}}</td>
       <td>{{size}}</td>
-      <td>{{weightType}}</td>
-      <td>{{qty}}</td>
-      <td>{{qtyType}}</td>
-      <td>{{price}}{{worker}}</td>
+      <td>{{crust}}</td>
+      <td>{{toppings}}</td>
       <td>{{#if new}}<a href="/{{_id}}" class="ui mini primary button makeItem">Start the Order!</a>{{else}}<a href="/{{_id}}" class="ui mini primary button">Get 'er done!</a>{{/if}}</td>
     </tr>
   {{/if}}  

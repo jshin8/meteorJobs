@@ -2,6 +2,7 @@
 	<br>
 	{{#if isAdminUser}}
 		<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
+		
 		{{> updateRolesModal}}
 	{{else}}	
 		{{#if isInRole 'worker'}}

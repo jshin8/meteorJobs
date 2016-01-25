@@ -5,14 +5,10 @@
 	  <table class="ui compact celled striped table">
 	    <thead>
 	      <tr>
-	        <th class="two column wide">Store</th>
-	        <th class="two column wide">Name</th>
-	        <th class="two column wide">Size</th>
-	        <th class="two column wide">Weight Type</th>
-	        <th class="two column wide">Qty</th>
-	        <th class="two column wide">Qty Type</th>
-	        <th class="two column wide">Price</th>
-	        <th class="two column wide">Status</th>
+	        <th class="three column wide">Size</th>
+	        <th class="three column wide">Crust</th>
+	        <th class="three column wide">Toppings</th>
+	        <th class="three column wide">Status</th>
 	        {{#if isLoggedIn}}<th></th>{{/if}}
 	      </tr>
 	    </thead>
@@ -28,8 +24,6 @@
 <template name="item">
   {{#if editing}}
     <tr class="ui form">
-      <td><div class="ui mini input"><input type="text" id="editItemStore" value="{{store}}"></div></td>
-      <td><div class="ui mini input"><input type="text" id="editItemName" value="{{name}}"></div></td>
       <td><div class="ui mini input">
  			<select class="ui dropdown" id='editItemSize'>
  			  <option value="{{size}}">{{size}}</option>
@@ -38,10 +32,23 @@
 			  <option value="Large">Large</option>
 		  	</select>
       </div></td>
-      <td><div class="ui mini input"><input type="text" id="editItemWeightType" value="{{weightType}}"></div></td>
-      <td><div class="ui mini input"><input type="text" id="editItemQty" value="{{qty}}"></div></td>
-      <td><div class="ui mini input"><input type="text" id="editItemQtyType" value="{{qtyType}}"></div></td>
-      <td><div class="ui mini input"><input type="text" id="editItemPrice" value="{{price}}"></div></td>
+      <td><div class="ui mini input">
+ 			<select class="ui dropdown" id='editItemCrust'>
+ 			  <option value="{{crust}}">{{crust}}</option>
+			  <option value="Thin">Thin</option>
+			  <option value="Regular">Regular</option>
+			  <option value="Pan">Pan</option>
+		  	</select>
+      </div></td>
+      <td><div class="ui mini input">
+ 			<select class="ui dropdown" id='editItemToppings'>
+ 			  <option value="{{toppings}}">{{toppings}}</option>
+			  <option value="Cheese">Cheese</option>
+			  <option value="Mushroom">Mushroom</option>
+			  <option value="Pepperoni">Pepperoni</option>
+			  <option value="Sausage">Sausage</option>
+		  	</select>
+      </div></td>
       <td></td>
       <td><button class="ui mini primary button saveItem"><i class="ui save icon"></i>Save</button><button class="ui mini red button cancelItem"><i class="ui cancel icon"></i>Cancel</button></td>
     </tr>
@@ -49,13 +56,9 @@
 	  {{#if canEdit}}
 		  	{{#if rated}}
 			    <tr>
-			      <td>{{store}}</td>
-			      <td>{{name}}</td>
 			      <td>{{size}}</td>
-			      <td>{{weightType}}</td>
-			      <td>{{qty}}</td>
-			      <td>{{qtyType}}</td>
-			      <td>{{price}}</td>
+			      <td>{{crust}}</td>
+			      <td>{{toppings}}</td>
 			      <td>{{status}}</td>
 			      <td>{{#if stillEditable}}<button class="ui mini primary button editItem">Edit Order</button><button class="ui mini red button deleteItem">Cancel Order</button>{{/if}}{{#if complete}}{{> rateModal}}{{/if}}</td>
 			    </tr>

@@ -7,44 +7,38 @@
 
   <div class="content">
     <form class="ui form" id="addItemForm">
-      <div class="two fields">
-        <div class="field">
-          <label for="itemStore">Store:</label>
-          <input type="text" id="itemStore">
-        </div>
-        <div class="field">
-          <label for="itemName">Name:</label>
-          <input type="text" id="itemName">
-        </div>
-      </div>
-      <div class="five fields">
+      <div class="three fields">
         <div class="field">
           <label for="itemSize">Size:</label>
-          
           <select class="ui dropdown" id='itemSize'>
-          	  <option value=""></option>
-			  <option value="Small">Small</option>
-			  <option value="Medium">Medium</option>
-			  <option value="Large">Large</option>
-		  </select>
+              <option value=""></option>
+              <option value="Small">Small</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="itemCrust">Crust:</label>
+          <select class="ui dropdown" id='itemCrust'>
+              <option value=""></option>
+              <option value="Thin">Thin</option>
+              <option value="Regular">Regular</option>
+              <option value="Pan">Pan</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="itemToppings">Toppings:</label>
+          <select class="ui dropdown" id='itemToppings'>
+              <option value="Cheese">Cheese</option>
+              <option value="Mushroom">Mushroom</option>
+              <option value="Pepperoni">Pepperoni</option>
+              <option value="Sausage">Sausage</option>
+          </select>
+        </div>
+      </div>
+          <label for="itemPrice"></label>
+          <input type="hidden" id="itemPrice" value='1'>
 
-        </div>
-        <div class="field">
-          <label for="itemWeightType">Weight Type:</label>
-          <input type="text" id="itemWeightType">
-        </div>
-        <div class="field">
-          <label for="itemQty">Qty</label>
-          <input type="text" id="itemQty">
-        </div>
-        <div class="field">
-          <label for="itemQtyType">Qty Type:</label>
-          <input type="text" id="itemQtyType">
-        </div>
-        <div class="field">
-          <label for="itemPrice">Price:</label>
-          <input type="text" id="itemPrice">
-        </div>
           <label for="itemEmail"></label>
           <input type="hidden" id="itemEmail" value="{{#with currentUser}}{{email}}{{/with}}">
 
@@ -68,7 +62,6 @@
 
           <label for="itemRating"></label>
           <input type="hidden" id="itemRating" value="none">
-      </div>
       <input type="submit" id="addNewItem" class="ui mini primary button" value="Save">
       <div id="cancelButton" class="button ui mini red button">Cancel</div>
     </form>

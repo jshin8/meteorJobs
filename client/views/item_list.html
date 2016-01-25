@@ -5,13 +5,9 @@
     <table class="ui compact celled striped table">
       <thead>
         <tr>
-          <th class="two column wide"><i class="ui search icon" id="searchButton"></i>Store{{> itemsearch columnName='store'}}</th>
-          <th class="two column wide">Name{{> itemsearch columnName='name'}}</th>
-          <th class="two column wide">Size{{> itemsearch columnName='size'}}</th>
-          <th class="two column wide">Weight Type{{> itemsearch columnName='weightType'}}</th>
-          <th class="two column wide">Qty{{> itemsearch columnName='qty' number=true }}</th>
-          <th class="two column wide">Qty Type{{> itemsearch columnName='qtyType'}}</th>
-          <th class="two column wide">Price{{> itemsearch columnName='price' number=true }}</th>
+          <th class="three column wide"><i class="ui search icon" id="searchButton"></i>Size{{> itemsearch columnName='size'}}</th>
+          <th class="three column wide">Crust{{> itemsearch columnName='crust'}}</th>
+          <th class="three column wide">Toppings{{> itemsearch columnName='toppings'}}</th>
         </tr>
       </thead>
       <tbody>
@@ -27,13 +23,10 @@
       <table class="ui compact celled striped table">
         <thead>
           <tr>
-            <th class="two column wide"><i class="ui search icon" id="searchButton"></i>Store{{> itemsearch columnName='store'}}</th>
-            <th class="two column wide">Name{{> itemsearch columnName='name'}}</th>
-            <th class="two column wide">Size{{> itemsearch columnName='size'}}</th>
-            <th class="two column wide">Weight Type{{> itemsearch columnName='weightType'}}</th>
-            <th class="two column wide">Qty{{> itemsearch columnName='qty' number=true }}</th>
-            <th class="two column wide">Qty Type{{> itemsearch columnName='qtyType'}}</th>
-            <th class="two column wide">Price{{> itemsearch columnName='price' number=true }}</th>
+            <th class="three column wide"><i class="ui search icon" id="searchButton"></i>Size{{> itemsearch columnName='size'}}</th>
+            <th class="three column wide">Crust{{> itemsearch columnName='crust'}}</th>
+            <th class="three column wide">Toppings{{> itemsearch columnName='toppings'}}</th>
+            <th class="three column wide">Email{{> itemsearch columnName='email'}}</th>
           </tr>
         </thead>
         <tbody>
@@ -58,25 +51,18 @@
   {{#if canSee}}
     {{#if rated}}
       <tr>
-        <td>{{store}}</td>
-        <td>{{name}}</td>
         <td>{{size}}</td>
-        <td>{{weightType}}</td>
-        <td>{{qty}}</td>
-        <td>{{qtyType}}</td>
-        <td>{{price}}</td>
+        <td>{{crust}}</td>
+        <td>{{toppings}}</td>
       </tr>
     {{/if}}
   {{else}}
     {{#if workerCanSee}}
       <tr>
-        <td>{{store}}</td>
-        <td>{{name}}</td>
         <td>{{size}}</td>
-        <td>{{weightType}}</td>
-        <td>{{qty}}</td>
-        <td>{{qtyType}}</td>
-        <td>{{price}}</td>
+        <td>{{crust}}</td>
+        <td>{{toppings}}</td>
+        <td>{{email}}</td>
       </tr>
     {{/if}}
   {{/if}}

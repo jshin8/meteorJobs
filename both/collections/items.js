@@ -22,40 +22,24 @@ Items.allow({
 });
 
 Items.attachSchema(new SimpleSchema({
-  store: {
-    type: String,
-    label: "Store Name",
-    max: 200
-  },
-  name: {
-    type: String,
-    label: "Name",
-    max: 200
-  },
   size: {
     type: String,
-    label: "Size",
+    label: "size",
     min: 1  
   },
-  weightType: {
+  crust: {
     type: String,
-    label: "Weight Type",
-    max: 200
+    label: "crust",
+    min: 1
   },
-  qty: {
-    type: Number,
-    label: "Quantity",
-    decimal: true
-  },
-  qtyType: {
+  toppings: {
     type: String,
-    label: "Quantity Type",
-    max: 200
+    label: "toppings",
+    min: 1
   },
   price: {
-    type: Number,
-    label: "Price",
-    decimal: true
+    type: String,
+    label: "price",
   },
   owner: {
     type: String,
@@ -63,7 +47,7 @@ Items.attachSchema(new SimpleSchema({
   },
   email: {
     type: String,
-    label: 'Email'
+    label: 'email'
   },
   worker: {
   	type: String,
@@ -97,13 +81,9 @@ Items.attachSchema(new SimpleSchema({
 
 var saveItem = function(){
     var editItem = {
-      store: $("#editItemStore").val(),
-      name: $("#editItemName").val(),
       size: $("#editItemSize").val(),
-      weightType: $("#editItemWeightType").val(),
-      qty: $("#editItemQty").val(),
-      qtyType: $("#editItemQtyType").val(),
-      price: $("#editItemPrice").val()
+      crust: $("#editItemCrust").val(),
+      toppings: $("#editItemToppings").val(),
     };
 
     Items.update(Session.get('editItemId'), {$set: editItem}, {validationContext: 'updateForm'}, function(error, result) {
@@ -115,12 +95,9 @@ var saveItem = function(){
 
 var addItem = function(){
   var newItem = {
-    store: $('#itemStore').val(),
-    name: $('#itemName').val(),
     size: $('#itemSize').val(),
-    weightType: $('#itemWeightType').val(),
-    qty: $('#itemQty').val(),
-    qtyType: $('#itemQtyType').val(),
+    crust: $('#itemCrust').val(),
+    toppings: $('#itemToppings').val(),
     price: $('#itemPrice').val(),
     email: $('#itemEmail').val(),
     worker: $('#itemWorker').val(),
@@ -135,7 +112,7 @@ var addItem = function(){
   Items.insert(newItem, {validationContext: 'insertForm'}, function(error, result) {
     if(!error){
       this.$('form').find('input:text').val('');
-      $('#itemStore').focus();
+      $('#itemSize').focus();
     }
   });
 };
@@ -424,6 +401,18 @@ Template.specificOrder.helpers({
     return what.size;
   },
 
+  crust: function(){
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
+    return what.crust;
+  },
+
+  toppings: function(){
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
+    return what.toppings;
+  },
+
   statusOne: function(){
     var targetitem = FlowRouter.getParam('_id');
     var what =Items.findOne({_id:targetitem});
@@ -493,4 +482,21 @@ Template.specificOrder.events({
 });
 
 }
+
+TabularTables = {};
+ 
+TabularTables.Items = new Tabular.Table({
+  name: "Items",
+  collection: Items,
+  columns: [
+    {data: "worker", title: "Worker"},
+    {data: "size", title: "Size"},
+    {data: "crust", title: "Crust"},
+    {data: "email", title: "Email"},
+    
+    {
+      tmpl: Meteor.isClient 
+    }
+  ]
+});
 

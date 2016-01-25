@@ -7,9 +7,15 @@ FlowRouter.route('/', {
 });
 
 //admin routes
-FlowRouter.route('/admin', {
+FlowRouter.route('/accountsadmin', {
   action: function () {
     BlazeLayout.render('layout', {content: 'accountsAdmin'});
+  }
+});
+
+FlowRouter.route('/ordersadmin', {
+  action: function () {
+    BlazeLayout.render('layout', {content: 'ordersAdmin'});
   }
 });
 
