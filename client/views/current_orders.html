@@ -1,5 +1,5 @@
 <template name="currentOrders">
-  {{#if isInRole 'worker'}}
+{{#if isInRole 'worker'}}
 <br>
   <div class="ui medium header">Current Orders</div>
   <table class="ui compact celled striped table">
@@ -13,7 +13,7 @@
         <th class="two column wide">Qty</th>
         <th class="two column wide">Qty Type</th>
         <th class="two column wide">Price</th>
-        {{#if isLoggedIn}}<th></th>{{/if}}
+        <th></th>
         
       </tr>
     </thead>
@@ -23,11 +23,11 @@
       {{/each}}
     </tbody>
   </table>
-  {{/if}}  
+{{/if}}  
 </template>
 
 <template name="itemWorker">
-
+  {{#if incomplete}}
     <tr>
       <td>{{store}}</td>
       <td>{{name}}</td>
@@ -37,8 +37,8 @@
       <td>{{qty}}</td>
       <td>{{qtyType}}</td>
       <td>{{price}}{{worker}}</td>
-      {{#if isLoggedIn}}<td><a href="/{{_id}}" class="ui mini primary button makeItem">Start the Order!</a></td>{{/if}}
+      <td>{{#if new}}<a href="/{{_id}}" class="ui mini primary button makeItem">Start the Order!</a>{{else}}<a href="/{{_id}}" class="ui mini primary button">Get 'er done!</a>{{/if}}</td>
     </tr>
-    
+  {{/if}}  
 </template>
 

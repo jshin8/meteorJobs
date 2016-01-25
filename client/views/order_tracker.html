@@ -46,19 +46,21 @@
       <td><button class="ui mini primary button saveItem"><i class="ui save icon"></i>Save</button><button class="ui mini red button cancelItem"><i class="ui cancel icon"></i>Cancel</button></td>
     </tr>
   {{else}}
-  {{#if canEdit}}
-    <tr>
-      <td>{{store}}</td>
-      <td>{{name}}</td>
-      <td>{{size}}</td>
-      <td>{{weightType}}</td>
-      <td>{{qty}}</td>
-      <td>{{qtyType}}</td>
-      <td>{{price}}{{rating}}</td>
-      <td>{{status}}{{#if complete}}{{> rateModal}}{{/if}}</td>
-      {{#if isLoggedIn}}<td><button class="ui mini primary button editItem"><i class="ui edit icon"></i>Edit</button><button class="ui mini red button deleteItem"><i class="ui delete icon"></i>Delete</button></td>{{/if}}
-    </tr>
-    {{/if}}
+	  {{#if canEdit}}
+		  	{{#if rated}}
+			    <tr>
+			      <td>{{store}}</td>
+			      <td>{{name}}</td>
+			      <td>{{size}}</td>
+			      <td>{{weightType}}</td>
+			      <td>{{qty}}</td>
+			      <td>{{qtyType}}</td>
+			      <td>{{price}}</td>
+			      <td>{{status}}</td>
+			      <td>{{#if stillEditable}}<button class="ui mini primary button editItem">Edit Order</button><button class="ui mini red button deleteItem">Cancel Order</button>{{/if}}{{#if complete}}{{> rateModal}}{{/if}}</td>
+			    </tr>
+		    {{/if}}
+	   {{/if}}
   {{/if}}
 </template>
 

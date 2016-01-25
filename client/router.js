@@ -14,7 +14,7 @@ FlowRouter.route('/admin', {
 });
 
 
-//client routes
+//client/worker routes shared
 FlowRouter.route('/itemhistory', {
   action: function () {
     BlazeLayout.render('layout', {content: 'itemList'});
@@ -23,11 +23,7 @@ FlowRouter.route('/itemhistory', {
 
 //worker routes
 FlowRouter.route('/:_id', {
-  action: function (params, queryParams) {
-    console.log("params:", params);
-    console.log("query params:", queryParams);
-    var client = FlowRouter.getParam('_id');
-    console.log(client);
+  action: function () {
     BlazeLayout.render('layout', {content: 'specificOrder'});
   }
 });

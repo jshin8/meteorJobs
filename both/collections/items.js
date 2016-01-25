@@ -264,27 +264,33 @@ Template.item.helpers({
   canEdit: function(){
     return (Meteor.userId() === this.owner);
   },
+  rated: function(){
+    return (this.rating === 'none');
+  },
   status: function(){
-    if (this.statusFive == 'green') {
-      return ('Delivered.');
+    if (this.statusFive === 'green') {
+      return ('Delivered. Yum. Enjoy.');
     }
-    else if (this.statusFour == 'green') {
-      return ('Out for delivery!');
+    else if (this.statusFour === 'green') {
+      return ('Out for delivery!!!');
     }
-    else if (this.statusThree == 'green') {
-      return ("It's baking...");
+    else if (this.statusThree === 'green') {
+      return ("It's baking...real hot.");
     }
-    else if (this.statusTwo == 'green') {
-      return ('Prepping your pie...');
+    else if (this.statusTwo === 'green') {
+      return ("Tossin' dough and stuff...");
     }
-    else if (this.statusOne == 'green') {
-      return ('Order Received!');
+    else if (this.statusOne === 'green') {
+      return ('We received your order!');
     }
     else
       return ('Your order has been sent.');
   },
   complete: function(){
-      return (this.statusFive === 'green');
+    return (this.statusFive === 'green');
+  },
+  stillEditable: function(){
+    return (this.statusTwo === 'red');
   }
 });
 
@@ -361,9 +367,14 @@ Template.itemList.events({
 });
 
 Template.itemsDone.helpers({
-  
   canSee: function(){
     return (Meteor.userId() === this.owner);
+  },
+  rated: function(){
+    return (this.rating !== 'none');
+  },
+  workerCanSee: function() {
+    return (Meteor.userId() === this.worker);
   }
 });
 
@@ -374,6 +385,15 @@ Template.itemsDone.helpers({
 Template.currentOrders.helpers({
   items: function() {
     return Items.find();
+  }
+});
+
+Template.itemWorker.helpers({
+  new: function() {
+    return (this.statusOne === 'red');
+  },
+  incomplete: function(){
+    return (this.statusFive === 'red');
   }
 });
 
