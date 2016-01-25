@@ -17,8 +17,7 @@ Items.allow({
   remove: function (userId, doc) {
     // can only remove your own documents
     return doc.owner === userId;
-  },
-  fetch: ['owner']
+  }
   
 });
 
@@ -85,6 +84,14 @@ Items.attachSchema(new SimpleSchema({
   statusFour: {
     type: String,
     label: 'statusFour'
+  },
+  statusFive: {
+    type: String,
+    label: 'statusFive'
+  },
+  rating: {
+    type: String,
+    label: 'rating'
   }
 }));
 
@@ -120,7 +127,9 @@ var addItem = function(){
     statusOne: $('#itemStatusOne').val(),
     statusTwo: $('#itemStatusTwo').val(),
     statusThree: $('#itemStatusThree').val(),
-    statusFour: $('#itemStatusFour').val()
+    statusFour: $('#itemStatusFour').val(),
+    statusFive: $('#itemStatusFive').val(),
+    rating: $('#itemRating').val()
   };
 
   Items.insert(newItem, {validationContext: 'insertForm'}, function(error, result) {
@@ -256,7 +265,10 @@ Template.item.helpers({
     return (Meteor.userId() === this.owner);
   },
   status: function(){
-    if (this.statusFour == 'green') {
+    if (this.statusFive == 'green') {
+      return ('Delivered.');
+    }
+    else if (this.statusFour == 'green') {
       return ('Out for delivery!');
     }
     else if (this.statusThree == 'green') {
@@ -270,6 +282,9 @@ Template.item.helpers({
     }
     else
       return ('Your order has been sent.');
+  },
+  complete: function(){
+      return (this.statusFive === 'green');
   }
 });
 
@@ -300,6 +315,35 @@ Template.item.events({
   }
 });
 
+Template.rateModal.events({
+  'click .pink': function () {
+      $('#modalView').modal('show');
+      Session.set('userInScope', this);
+      console.log(this._id);
+    }
+});
+
+Template.innerRateModal.helpers({
+  userInScope: function() {
+    return Session.get('userInScope');
+  }
+});
+
+Template.innerRateModal.events({
+  'click .negative': function (){
+    Items.update({_id:this._id}, {$set:{rating:'bad'}}, function(error, result) {
+      console.log(error);
+    });
+  },
+  'click .positive': function (){
+    Items.update({_id:this._id}, {$set:{rating:'good'}}, function(error, result) {
+      console.log(error);
+    });
+  }
+});
+
+
+
 
 Template.itemList.helpers({
   items: function() {
@@ -324,6 +368,8 @@ Template.itemsDone.helpers({
 });
 
 
+
+
 //worker logic
 Template.currentOrders.helpers({
   items: function() {
@@ -345,84 +391,86 @@ Template.itemWorker.events({
 Template.specificOrder.helpers({
 
   email: function(){
-    var client = FlowRouter.getParam('_id');
-    console.log(client);
-    var what =Items.findOne({_id:client});
+    var targetitem = FlowRouter.getParam('_id');
+    console.log(targetitem);
+    var what =Items.findOne({_id:targetitem});
     console.log(what.email);
     return what.email;
   },
 
   size: function(){
-    var client = FlowRouter.getParam('_id');
-    var what =Items.findOne({_id:client});
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
     return what.size;
   },
 
   statusOne: function(){
-    var client = FlowRouter.getParam('_id');
-    var what =Items.findOne({_id:client});
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
     return what.statusOne;
   },
 
   statusTwo: function(){
-    var client = FlowRouter.getParam('_id');
-    var what =Items.findOne({_id:client});
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
     return what.statusTwo;
   },
 
   statusThree: function(){
-    var client = FlowRouter.getParam('_id');
-    var what =Items.findOne({_id:client});
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
     return what.statusThree;
   },
 
   statusFour: function(){
-    var client = FlowRouter.getParam('_id');
-    var what =Items.findOne({_id:client});
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
     return what.statusFour;
+  },
+
+  statusFive: function(){
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
+    return what.statusFive;
   }
 });
 
 Template.specificOrder.events({
   'click .one': function(){
-    var client = FlowRouter.getParam('_id');
-  	Items.update({_id:client}, {$set:{statusOne:'green'}}, function(error, result) {
+    var targetitem = FlowRouter.getParam('_id');
+  	Items.update({_id:targetitem}, {$set:{statusOne:'green'}}, function(error, result) {
     	console.log(error);
     });
   },
 
   'click .two': function(){
-    var client = FlowRouter.getParam('_id');
-    Items.update({_id:client}, {$set:{statusTwo:'green'}}, function(error, result) {
+    var targetitem = FlowRouter.getParam('_id');
+    Items.update({_id:targetitem}, {$set:{statusTwo:'green'}}, function(error, result) {
       console.log(error);
     });
   },
 
   'click .three': function(){
-    var client = FlowRouter.getParam('_id');
-    Items.update({_id:client}, {$set:{statusThree:'green'}}, function(error, result) {
+    var targetitem = FlowRouter.getParam('_id');
+    Items.update({_id:targetitem}, {$set:{statusThree:'green'}}, function(error, result) {
       console.log(error);
     });
   },
 
   'click .four': function(){
-    var client = FlowRouter.getParam('_id');
-    Items.update({_id:client}, {$set:{statusFour:'green'}}, function(error, result) {
+    var targetitem = FlowRouter.getParam('_id');
+    Items.update({_id:targetitem}, {$set:{statusFour:'green'}}, function(error, result) {
+      console.log(error);
+    });
+  },
+
+  'click .five': function(){
+    var targetitem = FlowRouter.getParam('_id');
+    Items.update({_id:targetitem}, {$set:{statusFive:'green'}}, function(error, result) {
       console.log(error);
     });
   }
 });
 
- // A version of Session that also store the key/value pair to local storage
-  // using Amplify
- var AmplifiedSession = _.extend({}, Session, {
-    keys: _.object(_.map(amplify.store(), function (value, key) {
-      return [key, JSON.stringify(value)];
-    })),
-    set: function (key, value) {
-      Session.set.apply(this, arguments);
-      amplify.store(key, value);
-    }
-  });
 }
 
