@@ -1,0 +1,62 @@
+<template name="orderTracker">
+	{{#if isLoggedIn}}
+	<div class="ui large header">Tracking your current order...</div>
+
+	  <table class="ui compact celled striped table">
+	    <thead>
+	      <tr>
+	        <th class="two column wide">Store</th>
+	        <th class="two column wide">Name</th>
+	        <th class="two column wide">Size</th>
+	        <th class="two column wide">Weight Type</th>
+	        <th class="two column wide">Qty</th>
+	        <th class="two column wide">Qty Type</th>
+	        <th class="two column wide">Price</th>
+	        <th class="two column wide">Status</th>
+	        {{#if isLoggedIn}}<th></th>{{/if}}
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {{#each items}}
+	        {{> item}}
+	      {{/each}}
+	    </tbody>
+	  </table>
+	{{/if}}
+</template>
+
+<template name="item">
+  {{#if editing}}
+    <tr class="ui form">
+      <td><div class="ui mini input"><input type="text" id="editItemStore" value="{{store}}"></div></td>
+      <td><div class="ui mini input"><input type="text" id="editItemName" value="{{name}}"></div></td>
+      <td><div class="ui mini input">
+ 			<select class="ui dropdown" id='editItemSize'>
+ 			  <option value="{{size}}">{{size}}</option>
+			  <option value="Small">Small</option>
+			  <option value="Medium">Medium</option>
+			  <option value="Large">Large</option>
+		  	</select>
+      </div></td>
+      <td><div class="ui mini input"><input type="text" id="editItemWeightType" value="{{weightType}}"></div></td>
+      <td><div class="ui mini input"><input type="text" id="editItemQty" value="{{qty}}"></div></td>
+      <td><div class="ui mini input"><input type="text" id="editItemQtyType" value="{{qtyType}}"></div></td>
+      <td><div class="ui mini input"><input type="text" id="editItemPrice" value="{{price}}"></div></td>
+      <td><button class="ui mini primary button saveItem"><i class="ui save icon"></i>Save</button><button class="ui mini red button cancelItem"><i class="ui cancel icon"></i>Cancel</button></td>
+    </tr>
+  {{else}}
+  {{#if canEdit}}
+    <tr>
+      <td>{{store}}</td>
+      <td>{{name}}</td>
+      <td>{{size}}</td>
+      <td>{{weightType}}</td>
+      <td>{{qty}}</td>
+      <td>{{qtyType}}</td>
+      <td>{{price}}</td>
+      <td>{{status}}</td>
+      {{#if isLoggedIn}}<td><button class="ui mini primary button editItem"><i class="ui edit icon"></i>Edit</button><button class="ui mini red button deleteItem"><i class="ui delete icon"></i>Delete</button></td>{{/if}}
+    </tr>
+    {{/if}}
+  {{/if}}
+</template>

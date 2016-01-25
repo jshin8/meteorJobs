@@ -241,20 +241,12 @@ Tracker.autorun(function(){
   Meteor.subscribe('allItems', Session.get('searchQuery'));
 });
 
-Template.itemList.helpers({
+Template.orderTracker.helpers({
   items: function() {
     return Items.find();
   }
 });
 
-Template.itemList.events({
-  'click #searchButton': function(e, t){
-    if($('.ui.input.filterInput:visible').length !== 0){
-      Session.set('searchQuery', {});
-    }
-    $('.ui.input.filterInput').transition('slide down');
-  }
-});
 
 Template.item.helpers({
   editing: function(){
@@ -262,6 +254,22 @@ Template.item.helpers({
   },
   canEdit: function(){
     return (Meteor.userId() === this.owner);
+  },
+  status: function(){
+    if (this.statusFour == 'green') {
+      return ('Out for delivery!');
+    }
+    else if (this.statusThree == 'green') {
+      return ("It's baking...");
+    }
+    else if (this.statusTwo == 'green') {
+      return ('Prepping your pie...');
+    }
+    else if (this.statusOne == 'green') {
+      return ('Order Received!');
+    }
+    else
+      return ('Your order has been sent.');
   }
 });
 
@@ -292,6 +300,28 @@ Template.item.events({
   }
 });
 
+
+Template.itemList.helpers({
+  items: function() {
+    return Items.find();
+  }
+});
+
+Template.itemList.events({
+  'click #searchButton': function(e, t){
+    if($('.ui.input.filterInput:visible').length !== 0){
+      Session.set('searchQuery', {});
+    }
+    $('.ui.input.filterInput').transition('slide down');
+  }
+});
+
+Template.itemsDone.helpers({
+  
+  canSee: function(){
+    return (Meteor.userId() === this.owner);
+  }
+});
 
 
 //worker logic
