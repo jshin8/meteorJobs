@@ -2,7 +2,7 @@ Items = new Mongo.Collection('items');
 
 Items.before.insert(function (userId, doc) {
   doc.owner = userId;  
-  //doc.createdAt = Date.now();
+  doc.createdAt = Date.now();
 });
 
 Items.allow({
@@ -38,8 +38,9 @@ Items.attachSchema(new SimpleSchema({
     min: 1
   },
   price: {
-    type: String,
+    type: Number,
     label: "price",
+    decimal: true
   },
   owner: {
     type: String,
@@ -76,6 +77,10 @@ Items.attachSchema(new SimpleSchema({
   rating: {
     type: String,
     label: 'rating'
+  },
+  createdAt: {
+    type: Date,
+    label: 'createdAt'
   }
 }));
 
@@ -241,7 +246,7 @@ Template.item.helpers({
   canEdit: function(){
     return (Meteor.userId() === this.owner);
   },
-  rated: function(){
+  notRated: function(){
     return (this.rating === 'none');
   },
   status: function(){
@@ -268,6 +273,9 @@ Template.item.helpers({
   },
   stillEditable: function(){
     return (this.statusTwo === 'red');
+  },
+  convertedTime: function(){
+    return moment(this.createdAt).calendar();
   }
 });
 
@@ -352,6 +360,9 @@ Template.itemsDone.helpers({
   },
   workerCanSee: function() {
     return (Meteor.userId() === this.worker);
+  },
+  convertedTime: function(){
+    return moment(this.createdAt).calendar();
   }
 });
 
@@ -371,6 +382,9 @@ Template.itemWorker.helpers({
   },
   incomplete: function(){
     return (this.statusFive === 'red');
+  },
+  convertedTime: function(){
+    return moment(this.createdAt).calendar();
   }
 });
 
@@ -501,6 +515,18 @@ TabularTables.Items = new Tabular.Table({
     {data: "size", title: "Size"},
     {data: "crust", title: "Crust"},
     {data: "email", title: "Email"},
+    {
+      data: "createdAt",
+      title: "Date",
+      render: function (val, type, doc) {
+        if (val) {
+       return moment(val).calendar();
+        }
+        else {
+          return("No date");
+        }
+      }
+    },
     
     {
       tmpl: Meteor.isClient 

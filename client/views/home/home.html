@@ -1,12 +1,14 @@
 <template name="home">
 	<br>
 	{{#if isAdminUser}}
-		<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
-		
+		<h1>pizza.</h1>
+		<div class="ui medium header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
+
 		{{> updateRolesModal}}
 	{{else}}	
 		{{#if isInRole 'worker'}}
-			<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
+			<h1>pizza.</h1>
+			<div class="ui medium header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
 
 			<div class="ui container">
 				{{> currentOrders}}
@@ -14,7 +16,8 @@
 
 		{{else}}
 			{{#if isInRole 'client'}}
-				<div class="ui huge header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
+				<h1>pizza.</h1>
+				<div class="ui medium header">Welcome {{#with currentUser}}{{email}}{{/with}}!</div>
 				
 				<div class="ui container">
 					{{> addItem}}
@@ -25,7 +28,8 @@
 			  	</div>
 
 			{{else}}
-				<div class="ui huge header">Hi stranger!</div>
+				<h1>pizza.</h1>
+				<div class="ui medium header">Hi stranger.</div>
 			{{/if}}	
 		{{/if}}
 	{{/if}}

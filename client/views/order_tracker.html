@@ -8,6 +8,7 @@
 	        <th class="three column wide">Size</th>
 	        <th class="three column wide">Crust</th>
 	        <th class="three column wide">Toppings</th>
+	        <th class="three column wide">Date</th>
 	        <th class="three column wide">Status</th>
 	        {{#if isLoggedIn}}<th></th>{{/if}}
 	      </tr>
@@ -50,15 +51,17 @@
 		  	</select>
       </div></td>
       <td></td>
+      <td></td>
       <td><button class="ui mini primary button saveItem"><i class="ui save icon"></i>Save</button><button class="ui mini red button cancelItem"><i class="ui cancel icon"></i>Cancel</button></td>
     </tr>
   {{else}}
 	  {{#if canEdit}}
-		  	{{#if rated}}
+		  	{{#if notRated}}
 			    <tr>
 			      <td>{{size}}</td>
 			      <td>{{crust}}</td>
 			      <td>{{toppings}}</td>
+			      <td>{{convertedTime}}</td>
 			      <td>{{status}}</td>
 			      <td>{{#if stillEditable}}<button class="ui mini primary button editItem">Edit Order</button><button class="ui mini red button deleteItem">Cancel Order</button>{{/if}}{{#if complete}}{{> rateModal}}{{/if}}</td>
 			    </tr>
