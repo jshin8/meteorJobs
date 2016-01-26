@@ -12,7 +12,8 @@ Items.allow({
   },
   update: function (userId, doc, fields, modifier) {
     // can only change your own documents
-    return doc.owner === userId;
+    // console.log(userId);
+    return (doc.owner === userId || fields == 'worker' || doc.worker == userId);
   },
   remove: function (userId, doc) {
     // can only remove your own documents
@@ -309,14 +310,14 @@ Template.item.events({
 Template.rateModal.events({
   'click .pink': function () {
       $('#modalView').modal('show');
-      Session.set('userInScope', this);
+      Session.set('itemInScope', this);
       console.log(this._id);
     }
 });
 
 Template.innerRateModal.helpers({
-  userInScope: function() {
-    return Session.get('userInScope');
+  itemInScope: function() {
+    return Session.get('itemInScope');
   }
 });
 
@@ -526,10 +527,6 @@ TabularTables.Items = new Tabular.Table({
           return("No date");
         }
       }
-    },
-    
-    {
-      tmpl: Meteor.isClient 
     }
   ]
 });
