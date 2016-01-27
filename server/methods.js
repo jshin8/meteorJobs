@@ -104,7 +104,7 @@ Meteor.methods({
 
 	},
 
-	 sendEmail: function (to, from, subject, text) {
+	sendEmail: function (to, from, subject, text) {
      
 
       // Let other method calls from the same client start running,
