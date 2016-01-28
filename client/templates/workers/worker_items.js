@@ -18,11 +18,7 @@ Template.itemWorker.helpers({
 
 Template.itemWorker.events({
   'click .makeItem': function(){
-  	var user = Meteor.user();
-  	console.log(user._id);
-    Items.update({_id:this._id}, {$set:{worker:user._id}}, function(error, result) {
-    	console.log(error);
-    });
+    Meteor.call('makeItem', this._id);
   }
   
 });
@@ -89,31 +85,23 @@ Template.specificOrder.helpers({
 Template.specificOrder.events({
   'click .one': function(){
     var targetitem = FlowRouter.getParam('_id');
-  	Items.update({_id:targetitem}, {$set:{statusOne:'green'}}, function(error, result) {
-    	console.log(error);
-    });
+    Meteor.call('statusOneChanger', targetitem);
   },
 
   'click .two': function(){
     var targetitem = FlowRouter.getParam('_id');
-    Items.update({_id:targetitem}, {$set:{statusTwo:'green'}}, function(error, result) {
-      console.log(error);
-    });
+    Meteor.call('statusTwoChanger', targetitem);
   },
 
   'click .three': function(){
     var targetitem = FlowRouter.getParam('_id');
-    Items.update({_id:targetitem}, {$set:{statusThree:'green'}}, function(error, result) {
-      console.log(error);
-    });
+    Meteor.call('statusThreeChanger', targetitem);
   },
 
   'click .four': function(){
     var targetitem = FlowRouter.getParam('_id');
     var what =Items.findOne({_id:targetitem});
-    Items.update({_id:targetitem}, {$set:{statusFour:'green'}}, function(error, result) {
-      console.log(error);
-    });
+    Meteor.call('statusFourChanger', targetitem);
     Meteor.call('sendEmail',
           what.email,
           'meteorjobsapp@gmail.com',
@@ -124,8 +112,6 @@ Template.specificOrder.events({
 
   'click .five': function(){
     var targetitem = FlowRouter.getParam('_id');
-    Items.update({_id:targetitem}, {$set:{statusFive:'green'}}, function(error, result) {
-      console.log(error);
-    });
+    Meteor.call('statusFiveChanger', targetitem);
   }
 });

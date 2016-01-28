@@ -117,5 +117,54 @@ Meteor.methods({
         subject: subject,
         text: text
       });
-    }
+    },
+
+    makeItem: function(itemId){
+    	var user = Meteor.user();
+    	Items.update({_id:itemId}, {$set:{worker:user._id}}, function(error, result) {
+    });
+    },
+
+
+    statusOneChanger: function(targetitem){
+  		Items.update({_id:targetitem}, {$set:{statusOne:'green'}}, function(error, result) {
+    });
+    },
+
+
+    statusTwoChanger: function(targetitem){
+  		Items.update({_id:targetitem}, {$set:{statusTwo:'green'}}, function(error, result) {
+    });
+    },
+
+
+    statusThreeChanger: function(targetitem){
+  		Items.update({_id:targetitem}, {$set:{statusThree:'green'}}, function(error, result) {
+    });
+    },
+
+
+    statusFourChanger: function(targetitem){
+  		Items.update({_id:targetitem}, {$set:{statusFour:'green'}}, function(error, result) {
+    });
+    },
+
+
+    statusFiveChanger: function(targetitem){
+  		Items.update({_id:targetitem}, {$set:{statusFive:'green'}}, function(error, result) {
+    });
+    },
+
+
+	negativeRating: function(itemId){
+		Items.update({_id:itemId}, {$set:{rating:'bad'}}, function(error, result) {
+    });
+	},    
+
+	positiveRating: function(itemId){
+		Items.update({_id:itemId}, {$set:{rating:'good'}}, function(error, result) {
+    });
+	}
+
 });
+

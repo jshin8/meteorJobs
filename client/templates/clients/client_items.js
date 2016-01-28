@@ -135,14 +135,10 @@ Template.innerRateModal.helpers({
 
 Template.innerRateModal.events({
   'click .negative': function (){
-    Items.update({_id:this._id}, {$set:{rating:'bad'}}, function(error, result) {
-      console.log(error);
-    });
+    Meteor.call('negativeRating', this._id);
   },
   'click .positive': function (){
-    Items.update({_id:this._id}, {$set:{rating:'good'}}, function(error, result) {
-      console.log(error);
-    });
+    Meteor.call('positiveRating', this._id);
   }
 });
 
