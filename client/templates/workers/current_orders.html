@@ -10,6 +10,7 @@
         <th class="three column wide">Crust</th>
         <th class="three column wide">Toppings</th>
         <th class="three column wide">Date</th>
+        <th class="three column wide">Price</th>
         <th></th>
         
       </tr>
@@ -31,6 +32,7 @@
       <td>{{crust}}</td>
       <td>{{toppings}}</td>
       <td>{{convertedTime}}</td>
+      <td>{{Price}}</td>
       <td>{{#if new}}<a href="/{{_id}}" class="ui mini primary button makeItem">Start the Order!</a>{{else}}<a href="/{{_id}}" class="ui mini primary button">Get 'er done!</a>{{/if}}</td>
     </tr>
   {{/if}}  

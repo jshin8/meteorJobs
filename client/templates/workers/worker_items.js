@@ -51,6 +51,12 @@ Template.specificOrder.helpers({
     return what.toppings;
   },
 
+  price: function(){
+    var targetitem = FlowRouter.getParam('_id');
+    var what =Items.findOne({_id:targetitem});
+    return what.price;
+  },
+
   statusOne: function(){
     var targetitem = FlowRouter.getParam('_id');
     var what =Items.findOne({_id:targetitem});

@@ -9,8 +9,9 @@
 	        <th class="three column wide">Crust</th>
 	        <th class="three column wide">Toppings</th>
 	        <th class="three column wide">Date</th>
+	        <th class="one column wide">Price</th>
 	        <th class="three column wide">Status</th>
-	        {{#if isLoggedIn}}<th></th>{{/if}}
+	        {{#if isLoggedIn}}<th class="one column wide"></th>{{/if}}
 	      </tr>
 	    </thead>
 	    <tbody>
@@ -52,6 +53,7 @@
       </div></td>
       <td></td>
       <td></td>
+      <td></td>
       <td><button class="ui mini primary button saveItem"><i class="ui save icon"></i>Save</button><button class="ui mini red button cancelItem"><i class="ui cancel icon"></i>Cancel</button></td>
     </tr>
   {{else}}
@@ -62,6 +64,7 @@
 			      <td>{{crust}}</td>
 			      <td>{{toppings}}</td>
 			      <td>{{convertedTime}}</td>
+			      <td>{{price}}</td>
 			      <td>{{status}}</td>
 			      <td>{{#if stillEditable}}<button class="ui mini primary button editItem">Edit Order</button><button class="ui mini red button deleteItem">Cancel Order</button>{{/if}}{{#if complete}}{{> rateModal}}{{/if}}</td>
 			    </tr>

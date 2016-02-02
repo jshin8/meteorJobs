@@ -34,11 +34,12 @@
               <option value="Pepperoni">Pepperoni</option>
               <option value="Sausage">Sausage</option>
           </select>
+        <div class="small field">
+          <label for="itemPrice">Price:</label>
+          <input type="number" id="itemPrice" value=0 readonly>
+        </div>  
         </div>
       </div>
-          <label for="itemPrice"></label>
-          <input type="hidden" id="itemPrice" value=1>
-
           <label for="itemEmail"></label>
           <input type="hidden" id="itemEmail" value="{{#with currentUser}}{{email}}{{/with}}">
 

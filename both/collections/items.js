@@ -137,6 +137,8 @@ TabularTables.Items = new Tabular.Table({
     {data: "rating", title: "Rating"},
     {data: "size", title: "Size"},
     {data: "crust", title: "Crust"},
+    {data: "toppings", title: "Toppings"},
+    {data: "price", title: "Price"},
     {data: "email", title: "Email"},
     {
       data: "createdAt",

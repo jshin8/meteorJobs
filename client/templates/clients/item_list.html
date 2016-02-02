@@ -9,6 +9,7 @@
           <th class="three column wide">Crust{{> itemsearch columnName='crust'}}</th>
           <th class="three column wide">Toppings{{> itemsearch columnName='toppings'}}</th>
           <th class="three column wide">Date{{> itemsearch columnName='createdAt'}}</th>
+          <th class="three column wide">Price{{> itemsearch columnName='price'}}</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@
             <th class="three column wide">Crust{{> itemsearch columnName='crust'}}</th>
             <th class="three column wide">Toppings{{> itemsearch columnName='toppings'}}</th>
             <th class="three column wide">Date{{> itemsearch columnName='createdAt'}}</th>
+            <th class="three column wide">Price{{> itemsearch columnName='price'}}</th>
             <th class="three column wide">Email{{> itemsearch columnName='email'}}</th>
           </tr>
         </thead>
@@ -57,6 +59,7 @@
         <td>{{crust}}</td>
         <td>{{toppings}}</td>
         <td>{{convertedTime}}</td>
+        <td>{{price}}</td>
       </tr>
     {{/if}}
   {{else}}
@@ -66,6 +69,7 @@
         <td>{{crust}}</td>
         <td>{{toppings}}</td>
         <td>{{convertedTime}}</td>
+        <td>{{price}}</td>
         <td>{{email}}</td>
       </tr>
     {{/if}}
