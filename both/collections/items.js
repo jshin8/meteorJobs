@@ -135,11 +135,11 @@ TabularTables.Items = new Tabular.Table({
   columns: [
     {data: "worker", title: "Worker"},
     {data: "rating", title: "Rating"},
+    {data: "email", title: "Customer Email"},
     {data: "size", title: "Size"},
     {data: "crust", title: "Crust"},
     {data: "toppings", title: "Toppings"},
     {data: "price", title: "Price"},
-    {data: "email", title: "Email"},
     {
       data: "createdAt",
       title: "Date",
